@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Bem-vindo à Pastelaria Delícia!</h1>
+    <p>Os melhores pastéis da cidade, feitos na hora para você.</p>
+    <p>Confira nosso cardápio e faça seu pedido!</p>
+    <a href="{{ url_for('cardapio') }}">Ver Cardápio</a>
+{% endblock %}
