@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Seu Carrinho de Compras</h1>
+
+{% if carrinho %}
+    <table style="width: 100%; text-align: left;">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Subtotal</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto_id, item in carrinho.items() %}
+            <tr>
+                <td>{{ item.nome }}</td>
+                <td>{{ item.quantidade }}</td>
+                <td>R$ {{ "%.2f"|format(item.preco) }}</td>
+                <td>R$ {{ "%.2f"|format(item.preco * item.quantidade) }}</td>
+                <td>
+                    <form action="{{ url_for('remover_item', produto_id=produto_id) }}" method="post">
+                        <button type="submit" style="background-color: #e74c3c;">Remover</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <h2>Total do Pedido: R$ {{ "%.2f"|format(total_pedido) }}</h2>
+    <p>O pagamento será realizado na entrega ou retirada.</p>
+    <form action="{{ url_for('finalizar_pedido') }}" method="post">
+        <button type="submit" style="width: 100%;">Confirmar e Finalizar Pedido</button>
+    </form>
+{% else %}
+    <p>Seu carrinho está vazio.</p>
+    <a href="{{ url_for('cardapio') }}">Voltar ao Cardápio</a>
+{% endif %}
+{% endblock %}

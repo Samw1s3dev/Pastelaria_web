@@ -33,18 +33,11 @@ def login_required(f):
 
 # Inicialização do App e do Banco de Dados
 app = Flask(__name__)
-
-# Configuração baseada no ambiente
-config_name = os.environ.get('FLASK_ENV', 'development')
-from config import config
-app.config.from_object(config[config_name])
-
-
-# Cria o diretório instance se não existir
 instance_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'instance')
 os.makedirs(instance_path, exist_ok=True)
 
-
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(instance_path, "pastelaria.db")}' # Define o arquivo do banco de dados
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # --- MODELOS DO BANCO DE DADOS ---
@@ -129,7 +122,8 @@ def cardapio():
                            pasteis_doces=pasteis_doces,
                            bebidas=bebidas)
 
-# A chave secreta é definida na configuração
+# Adicione uma chave secreta para o Flask gerenciar sessões
+app.secret_key = '8102@sarutneV'
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
@@ -409,8 +403,5 @@ def pedido_confirmado(pedido_id):
 if __name__ == '__main__':
     inicializar_banco() # Executa a função para criar o BD e os produtos
     
-    # Configurações para execução local
-    debug_mode = app.config.get('DEBUG', False)
-    port = int(os.environ.get('PORT', 5000))
     
-    app.run(host='0.0.0.0', port=port, debug=debug_mode)
+    app.run(debug=True) # Inicia o servidor web em modo de depuração

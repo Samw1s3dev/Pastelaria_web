@@ -17,10 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Etapa 4: Copiar o resto do código da aplicação para o contêiner.
 COPY . .
 
-# Etapa 5: Criar diretório instance e definir permissões
-RUN mkdir -p /app/instance && chmod 755 /app/instance
-
-# Etapa 6: Expor a porta que a aplicação vai rodar dentro do contêiner.
+# Etapa 5: Expor a porta que a aplicação vai rodar dentro do contêiner.
 # O Gunicorn vai rodar na porta 5000.
 EXPOSE 5000
 

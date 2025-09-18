@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Nosso Cardápio</h1>
+
+    <h2>Pastéis Salgados</h2>
+    <ul>
+        {% for produto in pasteis_salgados %}
+            <li><strong>{{ produto.nome }}</strong> - {{ produto.descricao }} - R$ {{ "%.2f"|format(produto.preco) }}</li>
+        {% else %}
+            <li>Nenhum pastel salgado disponível.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Pastéis Doces</h2>
+    <ul>
+        {% for produto in pasteis_doces %}
+            <li><strong>{{ produto.nome }}</strong> - {{ produto.descricao }} - R$ {{ "%.2f"|format(produto.preco) }}</li>
+        {% else %}
+            <li>Nenhum pastel doce disponível.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Bebidas</h2>
+    <ul>
+        {% for produto in bebidas %}
+            <li><strong>{{ produto.nome }}</strong> - {{ produto.descricao }} - R$ {{ "%.2f"|format(produto.preco) }}</li>
+        {% else %}
+            <li>Nenhuma bebida disponível.</li>
+        {% endfor %}
+    </ul>
+
+    <div class="cardapio-categoria">
+    <h2>Pastéis Salgados</h2>
+    <ul>
+        {% for produto in pasteis_salgados %}
+            <li>
+                <div class="produto-info">
+                    <strong>{{ produto.nome }}</strong>
+                    <p>{{ produto.descricao }}</p>
+                </div>
+                <span class="preco">R$ {{ "%.2f"|format(produto.preco) }}</span>
+                <form action="{{ url_for('adicionar_carrinho', produto_id=produto.id) }}" method="post" style="margin: 0;">
+                    <button type="submit">Adicionar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="cardapio-categoria">
+    <h2>Pastéis Doces</h2>
+    <ul>
+        {% for produto in pasteis_doces %}
+            <li>
+                <div class="produto-info">
+                    <strong>{{ produto.nome }}</strong>
+                    <p>{{ produto.descricao }}</p>
+                </div>
+                <span class="preco">R$ {{ "%.2f"|format(produto.preco) }}</span>
+                <form action="{{ url_for('adicionar_carrinho', produto_id=produto.id) }}" method="post" style="margin: 0;">
+                    <button type="submit">Adicionar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="cardapio-categoria">
+    <h2>Bebidas</h2>
+    <ul>
+        {% for produto in bebidas %}
+            <li>
+                <div class="produto-info">
+                    <strong>{{ produto.nome }}</strong>
+                    <p>{{ produto.descricao }}</p>
+                </div>
+                <span class="preco">R$ {{ "%.2f"|format(produto.preco) }}</span>
+                <form action="{{ url_for('adicionar_carrinho', produto_id=produto.id) }}" method="post" style="margin: 0;">
+                    <button type="submit">Adicionar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

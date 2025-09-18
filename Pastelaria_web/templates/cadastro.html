@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Cadastre-se para Fazer um Pedido</h1>
+    <p>Precisamos dos seus dados para a entrega.</p>
+    
+    <form action="{{ url_for('cadastro') }}" method="post">
+        <label for="nome">Nome Completo:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="telefone">Telefone (com DDD):</label><br>
+        <input type="text" id="telefone" name="telefone" required><br><br>
+        
+        <label for="endereco">Endereço Completo (Rua, Número, Bairro, Complemento):</label><br>
+        <input type="text" id="endereco" name="endereco" required style="width: 400px;"><br><br>
+
+        <label for="senha">Crie uma Senha:</label><br>
+        <input type="password" id="senha" name="senha" required><br><br>
+
+        <div>
+            <input type="checkbox" id="consentimento" name="consentimento" required>
+            <label for="consentimento">
+                <b>Termo LGPD:</b> Eu concordo e dou meu consentimento para que a Pastelaria Delícia armazene meus dados (nome, telefone, endereço) exclusivamente para o propósito de processar e entregar meus pedidos, conforme a Lei Geral de Proteção de Dados.
+            </label>
+        </div>
+        <br>
+        <button type="submit">Cadastrar e Ir para o Cardápio</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Pedido Confirmado!</h1>
+    <p>Obrigado, {{ session.cliente_nome }}!</p>
+    <p>Seu pedido de número <strong>#{{ pedido.id }}</strong> foi recebido e já está sendo preparado.</p>
+    <p>Valor Total: <strong>R$ {{ "%.2f"|format(pedido.valor_total) }}</strong></p>
+    <p>Status: <strong>{{ pedido.status }}</strong></p>
+    <br>
+    <a href="{{ url_for('cardapio') }}">Fazer um novo pedido</a>
+{% endblock %}

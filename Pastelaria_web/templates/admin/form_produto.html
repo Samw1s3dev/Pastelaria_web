@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ titulo }}</h1>
+<form method="post">
+    <label for="nome">Nome do Produto</label>
+    <input type="text" name="nome" value="{{ produto.nome if produto else '' }}" required>
+
+    <label for="descricao">Descrição</label>
+    <input type="text" name="descricao" value="{{ produto.descricao if produto else '' }}">
+
+    <label for="preco">Preço (Ex: 8.50)</label>
+    <input type="number" step="0.01" name="preco" value="{{ produto.preco if produto else '' }}" required>
+
+    <label for="categoria">Categoria</label>
+    <select name="categoria" required>
+        <option value="Pastel Salgado" {% if produto and produto.categoria == 'Pastel Salgado' %}selected{% endif %}>Pastel Salgado</option>
+        <option value="Pastel Doce" {% if produto and produto.categoria == 'Pastel Doce' %}selected{% endif %}>Pastel Doce</option>
+        <option value="Bebida" {% if produto and produto.categoria == 'Bebida' %}selected{% endif %}>Bebida</option>
+    </select>
+
+    <button type="submit">Salvar</button>
+</form>
+{% endblock %}

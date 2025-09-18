@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Painel de Administração</h1>
+<p>Bem-vindo, administrador!</p>
+<p>Total de Pedidos Recebidos: <strong>{{ total_pedidos }}</strong></p>
+<p>Produtos Cadastrados: <strong>{{ total_produtos }}</strong></p>
+<hr>
+<a href="{{ url_for('admin_pedidos') }}">Ver Todos os Pedidos</a><br>
+<a href="{{ url_for('admin_produtos') }}">Gerenciar Produtos</a>
+{% endblock %}
